@@ -5,7 +5,7 @@ import { IProductList } from '../Interfaces/IProductList';
 import { fromEvent, Observable } from 'rxjs';
 import {
   debounceTime,
-  map,
+  map
 } from 'rxjs/operators';
 @Component({
   selector: 'app-product-search',
