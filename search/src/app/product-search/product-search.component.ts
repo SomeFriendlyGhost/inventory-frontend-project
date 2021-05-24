@@ -16,10 +16,13 @@ export class ProductSearchComponent implements OnInit {
   fullProductList: IProduct[] = [];
   subsetProductList: IProduct[] = [];
   pageStart: number = 0;
-  pageEnd: number = 10
+  pageEnd: number = 10;
+  currentPage: number = 1;
+  maxPage: number = 1;
   startSearch: boolean = false;
   searchString: string = "";
   loaded: boolean = false;
+
   constructor(private http: HttpClient) {
 
   }
@@ -28,13 +31,21 @@ export class ProductSearchComponent implements OnInit {
   }
 
   nextPage(): void{
-    this.pageStart = this.pageEnd;
-    this.pageEnd = this.pageEnd + 10;
+    if(this.pageEnd < this.fullProductList.length){
+      this.pageStart = this.pageEnd;
+      this.pageEnd = this.pageEnd + 10;
+      this.currentPage = this.currentPage +1;
+    }
     console.log(this.pageStart, this.pageEnd)
   }
+
   previousPage(): void{
-    this.pageEnd = this.pageStart;
-    this.pageStart = this.pageStart - 10;
+    if(this.pageStart != 0){
+      this.pageEnd = this.pageStart;
+      this.pageStart = this.pageStart - 10;
+      this.currentPage = this.currentPage -1;
+    }
+      
     console.log(this.pageStart, this.pageEnd)
   }
 
@@ -90,5 +101,7 @@ export class ProductSearchComponent implements OnInit {
       }
       else return
       })
+      //using the length of the array of viewed products to determine max page number
+      this.maxPage = Math.ceil(this.subsetProductList.length/10);
     }
 }

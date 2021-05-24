@@ -10,6 +10,9 @@
       <li class="page-item"><button (click)="nextPage()" class="page-link" type="submit">Next Page</button></li>
     </ul>
   </nav>
+  <div>
+    <p> Page {{currentPage}} / {{maxPage}} </p>
+  </div>
 <div *ngFor="let product of subsetProductList | slice:pageStart:pageEnd">
     <div class="list-group">
         <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
